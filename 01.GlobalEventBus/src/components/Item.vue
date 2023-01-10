@@ -17,38 +17,39 @@
 		//声明接收itemObj对象
 		props: ["item"],
 		methods: {
-			//通知App.vue将对应组件checkbox取反
+			//通知App.vue是否选择checkbox
 			handleCheck(id) {
-				//触发全局总线上的checkTodo事件
-				this.$bus.$emit("checkTodo", id)
+				//触发全局总线上的checkById事件
+				this.$bus.$emit("checkById", id);
 			},
 			//通知App.vue将对应组件删除
 			handleDelete(id) {
+				//触发全局总线上的deleteById事件
 				if (confirm("是否删除？")) {
-					//触发全局总线上的deleteTodo事件
-					this.$bus.$emit("deleteTodo", id)
+					this.$bus.$emit("deleteById", id);
 				}
 			},
 			//编辑对应item
 			handleEdit(item) {
-				item.isEdit = true
-				
+				item.isEdit = true;
+
 				//nextTick的回调会在下一次dom结点更新完毕执行
-				this.$nextTick(function(){
+				this.$nextTick(function() {
 					//获取焦点
-					this.$refs.inputTitle.focus()
+					this.$refs.inputTitle.focus();
 				})
 			},
 			//失去焦点完成编辑
 			handleBlur(item, event) {
-				item.isEdit = false
+				item.isEdit = false;
 
-				let value = event.target.value
-				if (!value.trim())
-					return alert("输入不能为空！")
-
-				//触发全局总线上的editTodo事件
-				this.$bus.$emit("editTodo", item.id, event.target.value)
+				let value = event.target.value;
+				if (!value.trim()) {
+					return alert("输入不能为空！");
+				}
+				
+				//触发全局总线上的editById事件
+				this.$bus.$emit("editById", item.id, event.target.value);
 			}
 		}
 	}

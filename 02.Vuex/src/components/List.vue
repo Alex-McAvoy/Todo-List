@@ -1,18 +1,22 @@
 <template>
 	<ul class="todo-main">
-		<Item v-for="itemObj in todos" :key="itemObj.id" :item="itemObj" />
+		<Item v-for="itemObj in todoList" :key="itemObj.id" :itemObj="itemObj" />
 	</ul>
 </template>
 
 <script>
-	import Item from './Item.vue'
+	import Item from "./Item.vue";
+	import {mapState} from "vuex";
 
 	export default {
-		name: 'List',
+		name: "List",
 		components: {
 			Item
 		},
-		props: ["todos"]
+		computed: {
+			//借助mapState从state中读取数据
+			...mapState(["todoList"])
+		}
 	}
 </script>
 

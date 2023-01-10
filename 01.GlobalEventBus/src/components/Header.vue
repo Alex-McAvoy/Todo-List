@@ -1,13 +1,13 @@
 <template>
 	<div class="todo-header">
-		<input type="text" placeholder="请输入你的任务名称，按回车键确认" v-model="title" @keyup.enter="add" />
+		<input type="text" placeholder="请输入你的任务名称，按回车键确认" v-model="title" @keyup.enter="add()" />
 	</div>
 </template>
 
 <script>
 	import {
 		nanoid
-	} from "nanoid"
+	} from "nanoid";
 
 	export default {
 		name: "Header",
@@ -19,19 +19,20 @@
 		methods: {
 			add() {
 				//校验数据
-				if(!this.title) 
-					return alert("输入不能为空")
+				if (!this.title) {
+					return alert("输入不能为空");
+				}
 				//封装todo对象
-				const todoObj = {
+				const todoItemObj = {
 					id: nanoid(),
 					title: this.title,
 					done: false,
 					isEdit: false
-				}
-				//自定义事件，通知app.vue添加todoObj对象
-				this.$emit("addTodo",todoObj)
+				};
+				//自定义事件，通知app.vue添加todoItemObj对象
+				this.$emit("addTodoItem", todoItemObj);
 				//清空title输入
-				this.title = ""
+				this.title = "";
 			}
 		}
 	}
