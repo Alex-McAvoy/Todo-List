@@ -1,5 +1,7 @@
 # todo-list
 
+vue 实现 Todo List
+
 ## Project setup
 ```
 npm install
