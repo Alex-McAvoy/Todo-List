@@ -4,5 +4,9 @@ import App from './App.vue'
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+	render: h => h(App),
+	beforeCreate() {
+		//安装全局事件总线
+		Vue.prototype.$bus = this
+	}
+}).$mount("#app")
